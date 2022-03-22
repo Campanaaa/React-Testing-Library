@@ -1,18 +1,12 @@
 import React from 'react';
-import { screen, render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
 describe('Test <App /> component', () => {
   beforeEach(() => {
-    const history = createMemoryHistory();
-    render(
-      <Router history={ history }>
-        <App />
-      </Router>,
-    );
+    renderWithRouter(<App />);
   });
 
   test('Tests navigations links', () => {
@@ -45,13 +39,8 @@ describe('Test <App /> component', () => {
   });
 
   test('Tests if it redirects to "Not Found" with an unkown url', () => {
-    const history = createMemoryHistory();
+    const { history } = renderWithRouter(<App />);
     history.push('/anything');
-    render(
-      <Router history={ history }>
-        <App />
-      </Router>,
-    );
     const notFountText = screen.getByText('Page requested not found');
     expect(notFountText).toBeInTheDocument();
   });
