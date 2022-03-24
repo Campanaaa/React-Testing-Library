@@ -58,7 +58,6 @@ describe('Tests <PokemonDetails /> component', () => {
       const checkbox = screen.getByRole('checkbox', { name: /Pokémon favoritado?/i });
       expect(checkbox).toBeInTheDocument();
     });
-
     test('test if alternated clicks works', () => {
       const checkbox = screen.getByRole('checkbox', { name: /Pokémon favoritado?/i });
       userEvent.click(checkbox);
